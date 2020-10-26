@@ -26,21 +26,13 @@ def get_simulation(ticker, name):
     t_intervals = 365
     iterations = 10
 
-    # Here is where we create the random potential future daily returns for each day. 
-        # norm.ppf - percent point function. 
-
-    # Don't worry if you don't understand this, all we are basically doing is taking the    
-    #the drift and the standard devs along with the some random percent values and using that 
-        #to create the potential future daily returns for each day.
-
+    # create the random potential future daily returns for each day. 
+       
     daily_returns = np.exp(drift.values + stdev.values * norm.ppf(np.random.rand(t_intervals, iterations)))
     S0 = data.iloc[-1]
     
-    # Here we are using np.zeros_like to create a numpy array, which is filled with 
-        #zeros but has the same shape as the daily_returns numpy array. 
-
-       # We are going to iterate to insert the price at the end of each future day, 
-      #  based on the random 
+    #  using np.zeros_like to create a numpy array 
+     
 
     price_list = np.zeros_like(daily_returns)
     price_list[0] = S0
